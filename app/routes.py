@@ -59,3 +59,20 @@ def update_user(pk):
 def deactivate_user(pk):
     user.deactivate(pk)
     return "", 204
+
+@app.get("/vehicles")
+def get_all_vehicles():
+    vehicle_list = vehicle.scan()
+    resp = {
+        "status": "ok",
+        "message": "success",
+        "users": vehicle_list
+    }
+    return resp
+
+@app.post("/vehicles")
+def create_vehicle(pk):
+    vehicle_data = request.jason
+    vehicle.insert(vehicle_data)
+    return "", 204
+    

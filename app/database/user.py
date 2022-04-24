@@ -66,8 +66,22 @@ def update(pk, user_data):
         hobbies=?
         WHERE id=?
     """
-
     cursor = get_db()
     cursor.execute(statement, value_tuple)
+    cursor.commit()
+    cursor.close()
+
+
+
+def deactivate(pk):
+    cursor = get_db()
+    statement = """
+        UPDATE user
+        SET active = 0
+        WHERE id = ?
+    """    
+
+    cursor = get_db()
+    cursor.execute(statement, (pk,))
     cursor.commit()
     cursor.close()
